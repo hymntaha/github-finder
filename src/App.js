@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Navbar from './components/layout/Navbar';
+import Alert from './components/layout/Alert';
 import Users from './components/users/Users';
 import Search from './components/users/Search';
+
 import axios from 'axios';
 import './App.css';
 
@@ -30,6 +32,7 @@ class App extends Component {
     this.setState({
       alert: { msg, type },
     });
+    setTimeout(() => this.setState({alerT: null}), 5000);
   };
   render() {
     const { users, loading } = this.state;
@@ -37,6 +40,7 @@ class App extends Component {
       <div className="App">
         <Navbar />
         <div className="container">
+          <Alert alert={this.state.alert} />
           <Search
             searchUser={this.searchUsers}
             clearUsers={this.clearUsers}
