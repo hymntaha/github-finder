@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Alert from './components/layout/Alert';
 import Users from './components/users/Users';
@@ -32,24 +33,36 @@ class App extends Component {
     this.setState({
       alert: { msg, type },
     });
-    setTimeout(() => this.setState({alerT: null}), 5000);
+    setTimeout(() => this.setState({ alerT: null }), 5000);
   };
   render() {
     const { users, loading } = this.state;
     return (
-      <div className="App">
-        <Navbar />
-        <div className="container">
-          <Alert alert={this.state.alert} />
-          <Search
-            searchUser={this.searchUsers}
-            clearUsers={this.clearUsers}
-            showClear={users.length > 0 ? true : false}
-            setAlert={this.setAlert}
-          />
-          <Users loading={loading} users={users} />
+      <Router>
+        <div className="App">
+          <Navbar />
+          <div className="container">
+            <Alert alert={this.state.alert} />
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={props => (
+                  <Fragment>
+                    <Search
+                      searchUser={this.searchUsers}
+                      clearUsers={this.clearUsers}
+                      showClear={users.length > 0 ? true : false}
+                      setAlert={this.setAlert}
+                    />
+                    <Users loading={loading} users={users} />
+                  </Fragment>
+                )}
+              />
+            </Switch>
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }
