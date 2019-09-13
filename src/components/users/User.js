@@ -41,9 +41,9 @@ class User extends Component {
         </Link>
         Hireable: {''}
         {hireable ? (
-          <i className="fas fa-check text-success" />
+          <i className="fas fa-check text-success"/>
         ) : (
-          <i className="fas fa-times-circle text-danger" />
+          <i className="fas fa-times-circle text-danger"/>
         )}
         <div className="card-grid-2">
           <div className="all-center">
@@ -51,10 +51,17 @@ class User extends Component {
               src={avatar_url}
               className="round-img"
               alt=""
-              style={{ width: '150px' }}
+              style={{width: '150px'}}
             />
             <h1>{name}</h1>
             <p>Location: {location}</p>
+          </div>
+          <div>
+            {bio && (<Fragment>
+              <h3>bio</h3>
+              <p>{bio}</p>
+            </Fragment>)}
+            <a href={html_url} className="btn btn-dark my-1">Visit Github Profile</a>
           </div>
         </div>
       </Fragment>
