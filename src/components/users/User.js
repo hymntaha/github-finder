@@ -1,7 +1,7 @@
-import React, { Component,Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import Spinner from '../layout/Spinner';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class User extends Component {
   componentDidMount() {
@@ -32,9 +32,21 @@ class User extends Component {
 
     const { loading } = this.props;
 
-    if (loading) return <Spinner/>
+    if (loading) return <Spinner />;
 
-    return <Fragment><Link to='/' className='btn btn-light'></Link></Fragment>;
+    return (
+      <Fragment>
+        <Link to="/" className="btn btn-light">
+          Back to Search
+        </Link>
+        Hireable: {''}
+        {hireable ? (
+          <i className="fas fa-check text-success" />
+        ) : (
+          <i className="fas fa-times-circle text-danger" />
+        )}
+      </Fragment>
+    );
   }
 }
 
