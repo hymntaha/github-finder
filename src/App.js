@@ -60,7 +60,7 @@ const App = () => {
     setLoading(false);
   };
 
-  const setAlert = (msg, type) => {
+  const showAlert = (msg, type) => {
     setAlert({ msg, type });
 
     setTimeout(() => setAlert(null), 5000);
@@ -82,7 +82,7 @@ const App = () => {
                     searchUser={searchUsers}
                     clearUsers={clearUsers}
                     showClear={users.length > 0 ? true : false}
-                    setAlert={setAlert}
+                    setAlert={showAlert}
                   />
                   <Users loading={loading} users={users} />
                 </Fragment>
