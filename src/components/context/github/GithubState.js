@@ -19,4 +19,13 @@ const GithubState = props => {
     loading: false,
   };
   const [state, dispatch] = useReducer(GithubReducer, initialSTate);
+
+  return <GithubContext.Provider value={{
+    users: state.users,
+    user: state.user,
+    repos: state.repos,
+    loading: state.loading
+  }}>
+
+  </GithubContext.Provider>
 };
