@@ -10,16 +10,15 @@ import axios from 'axios';
 import './App.css';
 
 const App = () => {
-  state = {
-    users: [],
-    user: {},
-    loading: false,
-    alert: null,
-    repos: []
-  };
+
+  const [users, setUsers] = useState([]);
+  const [user, setUsers] = useState({});
+  const [repos, setRepos] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState(null);
 
   searchUsers = async text => {
-    this.state({ loading: true });
+    setLoading(true);
 
     const res = await axios.get(
       `https://api.github.com/search/users?q=${text}&client_id=${
