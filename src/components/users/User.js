@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom';
 import Repos from '../repos/Repos';
 
 const User = ({user, loading, getUser, getUserRepos, repos, match}) => {
-  useEffect(()=> {
+  useEffect(() => {
     getUser(match.params.login);
     getUserRepos(match.params.login);
-  })
+    // eslint-disable-next-line
+  }, []);
 
 
   const {
