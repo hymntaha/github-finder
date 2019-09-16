@@ -12,7 +12,9 @@ import GithubState from './context/github/GuthubState';
 
 const App = () => {
   const [repos, setRepos] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
+
 
 
   const getUserRepos = async username => {
@@ -64,6 +66,7 @@ const App = () => {
                     {...props}
                     getUserRepos={getUserRepos}
                     repos={repos}
+                    loading={loading}
                   />
                 )}
               />
