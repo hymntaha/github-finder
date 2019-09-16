@@ -17,8 +17,6 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
 
-
-
   const getUser = async username => {
     setLoading(true);
 
@@ -70,7 +68,6 @@ const App = () => {
                 render={props => (
                   <Fragment>
                     <Search
-                      searchUser={searchUsers}
                       clearUsers={clearUsers}
                       showClear={users.length > 0 ? true : false}
                       setAlert={showAlert}
