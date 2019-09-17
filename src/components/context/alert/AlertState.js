@@ -1,86 +1,35 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
-import GithubContext from './githubContext';
-import GithubReducer from './githubReducer';
+import AlertContext from './alertContext';
+import AlertReducer from './alertReducer';
 
 import {
-  SEARCH_USERS,
-  SET_LOADING,
-  CLEAR_USER,
-  GET_USER,
-  GET_REPOS,
+  SET_ALERT,
+  REMOVE_ALERT
 } from '../types';
 
 const AlertState = props => {
-  const initialState = {
-    users: [],
-    user: {},
-    repos: {},
-    loading: false,
-  };
-  const [state, dispatch] = useReducer(GithubReducer, initialState);
+  const initialState = null;
 
-  const searchUsers = async text => {
-    setLoading();
+  const [state, dispatch] = useReducer(AlertReducer, initialState);
 
-    const res = await axios.get(
-      `https://api.github.com/search/users?q=${text}&client_id=${
-        process.env.REACT_APP_GITHUB_CLIENT_ID
-      }&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`,
-    );
-
+  const setAlert = (msg, type) => {
     dispatch({
-      type: SEARCH_USERS,
-      payload: res.data,
-    });
+      type: SET_ALERT, payload: {msg, type}
+    })
+
+    setTimeout(() => dispatch({type: REMOVE_ALERT}), 5000);
   };
-
-  const getUser = async username => {
-    setLoading();
-
-    const res = await axios.get(
-      `https://api.github.com/users?q=${username}?client_id=${
-        process.env.REACT_APP_GITHUB_CLIENT_ID
-      }&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`,
-    );
-
-    dispatch({
-      type: GET_USER,
-      payload: res.data,
-    });
-  };
-
-  const getUserRepos = async username => {
-    setLoading();
-
-    const res = await axios.get(
-      `https://api.github.com/users?q=${username}/repos?per_page=5&sort=created:asc?client_id=${
-        process.env.REACT_APP_GITHUB_CLIENT_ID
-      }&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`,
-    );
-
-    dispatch({ type: GET_REPOS, payload: res.data });
-  };
-
-  const clearUsers = () => dispatch({ type: CLEAR_USER });
-
-  const setLoading = () => dispatch({ type: SET_LOADING });
 
   return (
-    <GithubContext.Provider
+    <AlertReducer.Provider
       value={{
-        users: state.users,
-        user: state.user,
-        repos: state.repos,
-        loading: state.loading,
-        searchUsers,
-        clearUsers,
-        getUser,
-        getUserRepos,
+        alert: state.users,
+        setAlert,
       }}
     >
       {props.children}
-    </GithubContext.Provider>
+    </AlertReducer.Provider>
   );
 };
 
