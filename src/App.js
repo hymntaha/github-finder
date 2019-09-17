@@ -6,19 +6,11 @@ import Users from './components/users/Users';
 import User from './components/users/User';
 import Search from './components/users/Search';
 import About from './components/pages/About';
-import axios from 'axios';
 import './App.css';
 import GithubState from './context/github/GuthubState';
 
 const App = () => {
-  const [repos, setRepos] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
-
-
-
-
-
 
   const showAlert = (msg, type) => {
     setAlert({ msg, type });
